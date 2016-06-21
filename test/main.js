@@ -25,9 +25,13 @@ describe('#isBusinessDay', function() {
 		assert(this.utilDate.isBusinessDay());
 	});
 
-	it('2016 Labor Day is not a business', function() {
+	it('2016 Labor Day is not a business day', function() {
 		this.utilDate.setDateProp(new Date(2016, 9, 5));
 		assert(this.utilDate.isBusinessDay());
+	});
+	it('Washington’s Birthday is not a business day', function() {
+		this.utilDate.setDateProp(new Date(2016, 1, 15));
+		assert(!this.utilDate.isBusinessDay());
 	});
 });
 
@@ -71,12 +75,24 @@ describe('#isDynamicHoliday', function() {
 		this.utilDate.setDateProp(new Date(2016, 0, 18));
 		assert(this.utilDate.isDynamicHoliday());
 	});
+	it('Washington’s Birthday is a dynamic day', function() {
+		this.utilDate.setDateProp(new Date(2016, 1, 15));
+		assert(this.utilDate.isDynamicHoliday());
+	});
 });
 
 describe('#isDayByOrder', function() {
 	it ('2d Wednesday in May is 11th', function() {
 		this.utilDate.setDateProp(new Date(2016, 4, 11));
 		assert(this.utilDate.isDayByOrder(3, 2));
+	});
+	it ('3d Monday in February is 15th', function() {
+		this.utilDate.setDateProp(new Date(2016, 1, 15));
+		assert(this.utilDate.isDayByOrder(1, 3));
+	});
+	it ('do not consider hours, only date', function() {
+		this.utilDate.setDateProp(new Date(2016, 1, 15, 5));
+		assert(this.utilDate.isDayByOrder(1, 3));
 	});
 });
 
