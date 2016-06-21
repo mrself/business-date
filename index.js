@@ -157,7 +157,9 @@ UtilDate.prototype = {
 
 	isDayByOrder: function(day, order) {
 		var date = this.dateByDayOrder(day, order);
-		return this.date.getTime() === date.getTime();
+		return this.date.getFullYear() === date.getFullYear() &&
+			this.date.getMonth() === date.getMonth() &&
+			this.date.getDate() === date.getDate();
 	},
 
 	/**

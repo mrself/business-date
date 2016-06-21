@@ -90,6 +90,10 @@ describe('#isDayByOrder', function() {
 		this.utilDate.setDateProp(new Date(2016, 1, 15));
 		assert(this.utilDate.isDayByOrder(1, 3));
 	});
+	it ('do not consider hours, only date', function() {
+		this.utilDate.setDateProp(new Date(2016, 1, 15, 5));
+		assert(this.utilDate.isDayByOrder(1, 3));
+	});
 });
 
 describe('#dateByDayOrder', function() {
